@@ -35,22 +35,39 @@ user_input_df = pd.DataFrame(data, index=[0])
 
 st.subheader("📋 Student Profile")
 
-options_dict = {
-    "Tuition fees": (["Not Update", "Update"], 'Tuition_fees_up_to_date', 1),
-    "Scholarship": (["Non Scholarship", "Scholarship"], 'Scholarship_holder', 0),
-    "Debtor Status": (["Non Debtor", "Debtor"], 'Debtor', 1),
-    "Displacement": (["Non Displaced", "Displaced"], 'Displaced', 0),
-    "Class Type": (["Daytime", "Evening"], 'Daytime_evening_attendance', 0),
-    "Gender": (["Female", "Male"], 'Gender', 1),
-}
-
-cols = st.columns(3)
-for idx, (label, (choices, key, default_idx)) in enumerate(options_dict.items()):
-    with cols[idx % 3]:
-        user_choice = st.selectbox(f"{label}", options=choices, index=default_idx)
-        # Gunakan indeks pilihan sebagai nilai numerik
-        data[key] = [choices.index(user_choice)]
-
+col1, col2, col3 = st.columns(3)
+with col1:
+    encoder_Tuition_fees_up_to_date = LabelEncoder()
+    encoder_Tuition_fees_up_to_date.fit(['Not Update', 'Update'])
+    Tuition_fees_up_to_date = st.selectbox(label='Tuition fees', options=['Not Update', 'Update'], index=1)
+    data['Tuition_fees_up_to_date'] = [encoder_Tuition_fees_up_to_date.transform([Tuition_fees_up_to_date])[0]]
+with col2:
+    encoder_Scholarship_holder = LabelEncoder()
+    encoder_Scholarship_holder.fit(['Non Scholarship', 'Scholarship'])
+    Scholarship_holder = st.selectbox(label='Scholarship holder', options=['Non Scholarship', 'Scholarship'], index=0)
+    data['Scholarship_holder'] = [encoder_Scholarship_holder.transform([Scholarship_holder])[0]]
+with col3:
+    encoder_Debtor = LabelEncoder()
+    encoder_Debtor.fit(['Non Debtor', 'Debtor'])
+    Debtor = st.selectbox(label='Debtor', options=['Non Debtor', 'Debtor'], index=1)
+    data['Debtor'] = [encoder_Debtor.transform([Debtor])[0]]
+    
+col4, col5, col6 = st.columns(3)
+with col4:
+    encoder_Displaced = LabelEncoder()
+    encoder_Displaced.fit(['Non Displaced', 'Displaced'])
+    Displaced = st.selectbox(label='Displaced', options=['Non Displaced', 'Displaced'], index=0)
+    data['Displaced'] = [encoder_Displaced.transform([Displaced])[0]]
+with col5:
+    encoder_Daytime_evening_attendance = LabelEncoder()
+    encoder_Daytime_evening_attendance.fit(['Daytime', 'Evening'])
+    Daytime_evening_attendance = st.selectbox(label='Attendance', options=['Daytime', 'Evening'], index=0)
+    data['Daytime_evening_attendance'] = [encoder_Daytime_evening_attendance.transform([Daytime_evening_attendance])[0]]
+with col6:
+    encoder_Gender = LabelEncoder()
+    encoder_Gender.fit(['Female', 'Male'])
+    Gender = st.selectbox(label='Gender', options=['Female', 'Male'], index=1)
+    data['Gender'] = [encoder_Gender.transform([Gender])[0]]
 
 
 st.markdown("### 📊 Data Akademik")
