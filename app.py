@@ -48,9 +48,9 @@ cols = st.columns(3)
 for idx, (label, (choices, key, default_idx)) in enumerate(options_dict.items()):
     with cols[idx % 3]:
         user_choice = st.selectbox(f"{label}", options=choices, index=default_idx)
-        le = LabelEncoder()
-        le.fit(choices)
-        data[key] = [le.transform([user_choice])[0]]
+        # Gunakan indeks pilihan sebagai nilai numerik
+        data[key] = [choices.index(user_choice)]
+
 
 
 st.markdown("### 📊 Data Akademik")
