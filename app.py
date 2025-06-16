@@ -33,8 +33,7 @@ data = {}
 # Convert user input dictionary to DataFrame
 user_input_df = pd.DataFrame(data, index=[0])
 
-st.subheader("📋 Student Profile")
-
+st.markdown("### 📋 Student Information")
 col1, col2, col3 = st.columns(3)
 with col1:
     encoder_Tuition_fees_up_to_date = LabelEncoder()
@@ -69,8 +68,7 @@ with col6:
     Gender = st.selectbox(label='Gender', options=['Female', 'Male'], index=1)
     data['Gender'] = [encoder_Gender.transform([Gender])[0]]
 
-
-st.markdown("### 📊 Data Akademik")
+st.markdown("### 📊 Academic Scores")
 col7, col8 = st.columns(2)
 with col7:
     Admission_grade = st.slider(label='Admission Grade', min_value=0, max_value=200, value=100)
@@ -79,7 +77,7 @@ with col8:
     Previous_qualification_grade = st.slider(label='Previous Qualification Grade', min_value=0, max_value=200, value=100)
     data['Previous_qualification_grade'] = [Previous_qualification_grade]
 
-st.markdown("#### 📚 Semester 1")
+st.markdown("#### 📚 Curricular Units 1st Semester")
 col9, col10, col11, col12 = st.columns(4)
 with col9:
     Curricular_units_1st_sem_approved = st.number_input(label='1st Sem Approved', value=5)
@@ -94,7 +92,7 @@ with col12:
     Curricular_units_1st_sem_credited = st.number_input(label='1st Sem Credited', value=0)
     data['Curricular_units_1st_sem_credited'] = [Curricular_units_1st_sem_credited]
 
-st.markdown("#### 📚 Semester 2")
+st.markdown("#### 📚 Curricular Units 2nd Semester")
 col13, col14, col15, col16 = st.columns(4)
 with col13:
     Curricular_units_2nd_sem_approved = st.number_input(label='2nd Sem Approved', value=5)
@@ -115,23 +113,11 @@ user_input_df = pd.DataFrame(data, index=[0])
 # Display user input
 with st.expander("Raw Dataset"):
         st.dataframe(data=user_input_df, width=1200, height=20)
-# Tombol untuk prediksi
-predict_clicked = st.button("🔍 Lakukan Prediksi Sekarang")
-
-# Jika tombol diklik
-if predict_clicked:
-    with st.status("🔄 Sedang memproses prediksi...", expanded=True) as status:
-        st.write("📦 Menyiapkan data...")
-        processed_input = data_preparation(data)
-        time.sleep(1)
-
-        st.write("🤖 Menjalankan model prediksi...")
-        hasil_prediksi = prediction(processed_input)
-        time.sleep(1)
-
-        st.write("✅ Prediksi selesai.")
-        status.update(label="✅ Prediksi Berhasil", state="complete")
-
-    # Tampilkan hasil
-    st.markdown("### 🎯 Hasil Prediksi:")
-    st.code(f"{hasil_prediksi}", language="markdown")
+# Preprocess data and make prediction on button click
+if st.button('Click Here to Predict'):
+    new_data = data_preparation(data=data)
+    with st.spinner("Predicting..."):
+        time.sleep(2)  # Simulating prediction process
+        output = prediction(new_data)
+        st.toast("Prediction completed!")
+        st.success(f"## 🎯 Prediction Result: {output}")
