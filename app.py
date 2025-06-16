@@ -53,7 +53,7 @@ for idx, (label, (choices, key, default_idx)) in enumerate(options_dict.items())
         data[key] = [le.transform([user_choice])[0]]
 
 
-st.markdown("### 📊 Academic Scores")
+st.markdown("### 📊 Data Akademik")
 col7, col8 = st.columns(2)
 with col7:
     Admission_grade = st.slider(label='Admission Grade', min_value=0, max_value=200, value=100)
@@ -62,7 +62,7 @@ with col8:
     Previous_qualification_grade = st.slider(label='Previous Qualification Grade', min_value=0, max_value=200, value=100)
     data['Previous_qualification_grade'] = [Previous_qualification_grade]
 
-st.markdown("#### 📚 Curricular Units 1st Semester")
+st.markdown("#### 📚 Semester 1")
 col9, col10, col11, col12 = st.columns(4)
 with col9:
     Curricular_units_1st_sem_approved = st.number_input(label='1st Sem Approved', value=5)
@@ -77,7 +77,7 @@ with col12:
     Curricular_units_1st_sem_credited = st.number_input(label='1st Sem Credited', value=0)
     data['Curricular_units_1st_sem_credited'] = [Curricular_units_1st_sem_credited]
 
-st.markdown("#### 📚 Curricular Units 2nd Semester")
+st.markdown("#### 📚 Semester 2")
 col13, col14, col15, col16 = st.columns(4)
 with col13:
     Curricular_units_2nd_sem_approved = st.number_input(label='2nd Sem Approved', value=5)
