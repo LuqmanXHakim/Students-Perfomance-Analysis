@@ -27,97 +27,87 @@ from prediction import prediction
 
 st.title("🎓 Prediction Status Students")
 
-# Initialize an empty dictionary to store user input
-data = {}
+# Buat dictionary kosong untuk input pengguna
+user_inputs = {}
 
-# Convert user input dictionary to DataFrame
-user_input_df = pd.DataFrame(data, index=[0])
+# Ubah dictionary input pengguna menjadi DataFrame
+df_user_inputs = pd.DataFrame(user_inputs, index=[0])
 
 st.markdown("### 📋 Student Information")
-col1, col2, col3 = st.columns(3)
-with col1:
-    encoder_Tuition_fees_up_to_date = LabelEncoder()
-    encoder_Tuition_fees_up_to_date.fit(['Not Update', 'Update'])
-    Tuition_fees_up_to_date = st.selectbox(label='Tuition fees', options=['Not Update', 'Update'], index=1)
-    data['Tuition_fees_up_to_date'] = [encoder_Tuition_fees_up_to_date.transform([Tuition_fees_up_to_date])[0]]
-with col2:
-    encoder_Scholarship_holder = LabelEncoder()
-    encoder_Scholarship_holder.fit(['Non Scholarship', 'Scholarship'])
-    Scholarship_holder = st.selectbox(label='Scholarship holder', options=['Non Scholarship', 'Scholarship'], index=0)
-    data['Scholarship_holder'] = [encoder_Scholarship_holder.transform([Scholarship_holder])[0]]
-with col3:
-    encoder_Debtor = LabelEncoder()
-    encoder_Debtor.fit(['Non Debtor', 'Debtor'])
-    Debtor = st.selectbox(label='Debtor', options=['Non Debtor', 'Debtor'], index=1)
-    data['Debtor'] = [encoder_Debtor.transform([Debtor])[0]]
-    
-col4, col5, col6 = st.columns(3)
-with col4:
-    encoder_Displaced = LabelEncoder()
-    encoder_Displaced.fit(['Non Displaced', 'Displaced'])
-    Displaced = st.selectbox(label='Displaced', options=['Non Displaced', 'Displaced'], index=0)
-    data['Displaced'] = [encoder_Displaced.transform([Displaced])[0]]
-with col5:
-    encoder_Daytime_evening_attendance = LabelEncoder()
-    encoder_Daytime_evening_attendance.fit(['Daytime', 'Evening'])
-    Daytime_evening_attendance = st.selectbox(label='Attendance', options=['Daytime', 'Evening'], index=0)
-    data['Daytime_evening_attendance'] = [encoder_Daytime_evening_attendance.transform([Daytime_evening_attendance])[0]]
-with col6:
-    encoder_Gender = LabelEncoder()
-    encoder_Gender.fit(['Female', 'Male'])
-    Gender = st.selectbox(label='Gender', options=['Female', 'Male'], index=1)
-    data['Gender'] = [encoder_Gender.transform([Gender])[0]]
+cols1 = st.columns(3)
+with cols1[0]:
+    tuition_status = st.selectbox('Tuition fees', ['No', 'Yes'], index=1)
+    user_inputs['Tuition_fees_up_to_date'] = [tuition_status]
+with cols1[1]:
+    scholar_status = st.selectbox('Scholarship holder', ['Non Scholarship', 'Scholarship'], index=0)
+    user_inputs['Scholarship_holder'] = [scholar_status]
+with cols1[2]:
+    debtor_status = st.selectbox('Debtor', ['Non Debtor', 'Debtor'], index=1)
+    user_inputs['Debtor'] = [debtor_status]
+
+cols2 = st.columns(3)
+with cols2[0]:
+    displaced_status = st.selectbox('Displaced', ['Non Displaced', 'Displaced'], index=0)
+    user_inputs['Displaced'] = [displaced_status]
+with cols2[1]:
+    attendance_status = st.selectbox('Attendance', ['Daytime', 'Evening'], index=0)
+    user_inputs['Daytime_evening_attendance'] = [attendance_status]
+with cols2[2]:
+    gender_status = st.selectbox('Gender', ['Female', 'Male'], index=1)
+    user_inputs['Gender'] = [gender_status]
 
 st.markdown("### 📊 Academic Scores")
-col7, col8 = st.columns(2)
-with col7:
-    Admission_grade = st.slider(label='Admission Grade', min_value=0, max_value=200, value=100)
-    data['Admission_grade'] = [Admission_grade]
-with col8:
-    Previous_qualification_grade = st.slider(label='Previous Qualification Grade', min_value=0, max_value=200, value=100)
-    data['Previous_qualification_grade'] = [Previous_qualification_grade]
+cols3 = st.columns(2)
+with cols3[0]:
+    admission_score = st.slider('Admission Grade', 0, 200, 100)
+    user_inputs['Admission_grade'] = [admission_score]
+with cols3[1]:
+    prev_qual_score = st.slider('Previous Qualification Grade', 0, 200, 100)
+    user_inputs['Previous_qualification_grade'] = [prev_qual_score]
 
 st.markdown("#### 📚 Curricular Units 1st Semester")
-col9, col10, col11, col12 = st.columns(4)
-with col9:
-    Curricular_units_1st_sem_approved = st.number_input(label='1st Sem Approved', value=5)
-    data['Curricular_units_1st_sem_approved'] = [Curricular_units_1st_sem_approved]
-with col10:
-    Curricular_units_1st_sem_grade = st.number_input(label='1st Sem Grade', value=12)
-    data['Curricular_units_1st_sem_grade'] = [Curricular_units_1st_sem_grade]
-with col11:
-    Curricular_units_1st_sem_enrolled = st.number_input(label='1st Sem Enrolled', value=6)
-    data['Curricular_units_1st_sem_enrolled'] = [Curricular_units_1st_sem_enrolled]
-with col12:
-    Curricular_units_1st_sem_credited = st.number_input(label='1st Sem Credited', value=0)
-    data['Curricular_units_1st_sem_credited'] = [Curricular_units_1st_sem_credited]
+cols4 = st.columns(4)
+with cols4[0]:
+    first_approved = st.number_input('1st Sem Approved', value=5)
+    user_inputs['Curricular_units_1st_sem_approved'] = [first_approved]
+with cols4[1]:
+    first_grade = st.number_input('1st Sem Grade', value=12)
+    user_inputs['Curricular_units_1st_sem_grade'] = [first_grade]
+with cols4[2]:
+    first_enrolled = st.number_input('1st Sem Enrolled', value=6)
+    user_inputs['Curricular_units_1st_sem_enrolled'] = [first_enrolled]
+with cols4[3]:
+    first_credited = st.number_input('1st Sem Credited', value=0)
+    user_inputs['Curricular_units_1st_sem_credited'] = [first_credited]
 
 st.markdown("#### 📚 Curricular Units 2nd Semester")
-col13, col14, col15, col16 = st.columns(4)
-with col13:
-    Curricular_units_2nd_sem_approved = st.number_input(label='2nd Sem Approved', value=5)
-    data['Curricular_units_2nd_sem_approved'] = [Curricular_units_2nd_sem_approved]
-with col14:
-    Curricular_units_2nd_sem_grade = st.number_input(label='2nd Sem Grade', value=12)
-    data['Curricular_units_2nd_sem_grade'] = [Curricular_units_2nd_sem_grade]
-with col15:
-    Curricular_units_2nd_sem_enrolled = st.number_input(label='2nd Sem Enrolled', value=6)
-    data['Curricular_units_2nd_sem_enrolled'] = [Curricular_units_2nd_sem_enrolled]
-with col16:
-    Curricular_units_2nd_sem_credited = st.number_input(label='2nd Sem Credited', value=0)
-    data['Curricular_units_2nd_sem_credited'] = [Curricular_units_2nd_sem_credited]
+cols5 = st.columns(4)
+with cols5[0]:
+    second_approved = st.number_input('2nd Sem Approved', value=5)
+    user_inputs['Curricular_units_2nd_sem_approved'] = [second_approved]
+with cols5[1]:
+    second_grade = st.number_input('2nd Sem Grade', value=12)
+    user_inputs['Curricular_units_2nd_sem_grade'] = [second_grade]
+with cols5[2]:
+    second_enrolled = st.number_input('2nd Sem Enrolled', value=6)
+    user_inputs['Curricular_units_2nd_sem_enrolled'] = [second_enrolled]
+with cols5[3]:
+    second_credited = st.number_input('2nd Sem Credited', value=0)
+    user_inputs['Curricular_units_2nd_sem_credited'] = [second_credited]
 
-# Convert user input dictionary to DataFrame
-user_input_df = pd.DataFrame(data, index=[0])
+# Ubah input ke DataFrame
+df_user_inputs = pd.DataFrame(user_inputs, index=[0])
 
-# Display user input
+# Tampilkan dataset
 with st.expander("Raw Dataset"):
-        st.dataframe(data=user_input_df, width=1200, height=20)
-# Preprocess data and make prediction on button click
+    st.dataframe(data=df_user_inputs, width=1200, height=20)
+
+# Proses prediksi
 if st.button('Click Here to Predict'):
-    new_data = data_preparation(data=data)
+    processed_data = data_preparation(data=df_user_inputs)
     with st.spinner("Predicting..."):
-        time.sleep(2)  # Simulating prediction process
-        output = prediction(new_data)
+        time.sleep(2)
+        result = prediction(processed_data)
         st.toast("Prediction completed!")
-        st.success(f"## 🎯 Prediction Result: {output}")
+        st.success(f"## 🎯 Prediction Result: {result}")
+
