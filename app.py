@@ -33,7 +33,7 @@ student_data = {}
 # Convert to DataFrame
 input_df = pd.DataFrame(student_data, index=[0])
 
-st.markdown("### 📋 Student Information")
+st.markdown("### 📋 Student Profile")
 section1, section2, section3 = st.columns(3)
 with section1:
     tf_encoder = LabelEncoder()
@@ -68,7 +68,7 @@ with section6:
     gd_value = st.selectbox('Gender', ['Female', 'Male'], index=1)
     student_data['Gender'] = [gd_encoder.transform([gd_value])[0]]
 
-st.markdown("### 📊 Academic Scores")
+st.markdown("### 📊 Data Akademik")
 sec_a, sec_b = st.columns(2)
 with sec_a:
     grade1 = st.slider('Admission Grade', 0, 200, 100)
@@ -77,7 +77,7 @@ with sec_b:
     grade2 = st.slider('Previous Qualification Grade', 0, 200, 100)
     student_data['Previous_qualification_grade'] = [grade2]
 
-st.markdown("#### 📚 Curricular Units 1st Semester")
+st.markdown("#### 📚 Semester 1")
 g1, g2, g3, g4 = st.columns(4)
 with g1:
     approved1 = st.number_input('1st Sem Approved', value=5)
@@ -92,7 +92,7 @@ with g4:
     credited1 = st.number_input('1st Sem Credited', value=0)
     student_data['Curricular_units_1st_sem_credited'] = [credited1]
 
-st.markdown("#### 📚 Curricular Units 2nd Semester")
+st.markdown("#### 📚 Semester 2")
 h1, h2, h3, h4 = st.columns(4)
 with h1:
     approved2 = st.number_input('2nd Sem Approved', value=5)
@@ -115,7 +115,7 @@ with st.expander("Raw Dataset"):
     st.dataframe(input_df, width=1200, height=20)
 
 # Predict on button click
-if st.button('Click Here to Predict'):
+if st.button('🔍 Lakukan Prediksi Sekarang'):
     processed_data = data_preparation(data=student_data)
     with st.spinner("Predicting..."):
         time.sleep(2)
