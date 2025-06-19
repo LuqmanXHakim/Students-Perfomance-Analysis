@@ -73,6 +73,12 @@ streamlit run app.py
 Berikut kalimat alternatif yang berbeda namun memiliki makna yang sama:
 Dashboard ini dikembangkan menggunakan Google Looker Studio guna memvisualisasikan distribusi data serta menganalisis dampak masing-masing variabel terhadap performa mahasiswa. Anda dapat melihat dashboard tersebut melalui tautan berikut:
 
+```
+https://lookerstudio.google.com/reporting/459b6a22-df97-499a-8e25-8a80103825b7
+```
+![luqmanxhakim-dashboard](https://github.com/user-attachments/assets/e655070f-bba2-4ed2-9770-a5e4b704f418)
+
+
 ## Menjalankan Sistem Machine Learning
 Sistem machine learning yang dikembangkan dapat memprediksi kemungkinan seorang mahasiswa akan dropout atau lulus berdasarkan fitur-fitur akademik dan demografis.
 
@@ -91,6 +97,9 @@ Mulai aplikasi Streamlit dengan mengetik perintah berikut di terminal:
 ```
 
 ## Conclusion
+- Sebanyak 66% mahasiswa merupakan Laki-laki dan 34% lainnya Perempuan, dengan mayoritas berusia antara 17 hingga 23 tahun. 
+- Dari total 3.630 mahasiswa, 60,85% berhasil menyelesaikan studinya, sementara 39,14% tidak lulus atau mengalami dropout.
+- Dari total 969 mahasiswa penerima beasiswa, 134 orang mengalami dropout, sedangkan 835 orang lainnya berhasil lulus.
 
 
 ### Rekomendasi Action Items
